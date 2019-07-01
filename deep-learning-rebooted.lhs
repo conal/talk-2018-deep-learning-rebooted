@@ -230,6 +230,7 @@
 \end{itemize}
 }
 
+%format o = r
 \framet{Optimization}{
 \begin{itemize}\itemsep2.5ex \parskip1ex
 \item Describe a set of values as range of function: |f :: p -> c|.
