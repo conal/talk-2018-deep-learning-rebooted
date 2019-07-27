@@ -230,13 +230,12 @@
 \end{itemize}
 }
 
-%format o = r
 \framet{Optimization}{
 \begin{itemize}\itemsep2.5ex \parskip1ex
 \item Describe a set of values as range of function: |f :: p -> c|.
-\item Objective function: |o :: c -> R|.
-\item Find |argMin (o . f) :: p|.
-\item When |o . f| is differentiable, use GD.
+\item Objective function: |q :: c -> R|.
+\item Find |argMin (q . f) :: p|.
+\item When |q . f| is differentiable, use GD.
 \item Otherwise, other methods.
 \item Consider also global optimization, e.g., with interval methods.
 \end{itemize}
@@ -244,7 +243,7 @@
 
 \framet{Learning \emph{functions}}{
 \begin{itemize}\itemsep2.5ex \parskip1ex
-\item Special case of optimization, where |c = a -> b|, i.e., |f :: p -> (a -> b)|, and |o :: (a -> b) -> R|.
+\item Special case of optimization, where |c = a -> b|, i.e., |f :: p -> (a -> b)|, and |q :: (a -> b) -> R|.
 \item Objective function often based on sample set \(S \subseteq a \times b\). \\
       Measure mis-predictions (loss).
 \item Additivity enables parallel, log-time learning step.
