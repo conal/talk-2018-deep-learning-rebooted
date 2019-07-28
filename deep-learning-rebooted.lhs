@@ -14,8 +14,9 @@
 %include greek.fmt
 %include formatting.fmt
 
-\title{A functional reboot for deep learning}
-\date{January 2018}
+%\title{A functional reboot for deep learning}
+\title{What is the essence of deep learning?}
+\date{August 2019}
 % \date{\today{} (draft)}
 \institute[]{Target}
 
@@ -33,6 +34,8 @@
 \frame{\titlepage}
 % \institute{Target}
 % \date{Jan 2018}
+
+%if False
 
 \partframe{Original inspiration \\[2ex] October 2016}
 
@@ -88,6 +91,8 @@
 \end{itemize}
 }
 
+%endif
+
 \framet{Goals}{
 \vspace{8ex}
 \begin{itemize}\itemsep4ex \parskip1ex
@@ -110,6 +115,21 @@
 }
 
 \partframe{Accidental complexity \\[1ex] in deep learning }
+
+\framet{Accidental complexity in DL overview}{
+\begin{itemize}\itemsep1.8ex
+\item Imperative programming
+\item Weak typing
+\item Graphs/networks
+\item Layers
+\item Tensors/arrays
+\item Back propagation
+\item Linearity bias
+\item Hyper-parameters
+\item Stateful formulations
+\item Manual differentiation
+\end{itemize}
+}
 
 \framet{Imperative programming}{
 \begin{itemize}\itemsep2ex \parskip2ex
@@ -155,10 +175,11 @@
 \item Really, multi-dimensional arrays.
 \item Awkward: imagine you could program only with arrays (Fortran).\\
   %% (One size fits none.)
-\item Meaningless operations, e.g., element-wise array multiplication.
+\item Multiple intents / weakly typed
 \item Even as linear maps: meaning of \(m \times n\) array?
-\item Missing more natural (for programming) data types, e.g., trees.
-%% \item Consequence of graph API.
+\item Missing more natural \& compositional data types, e.g., trees.
+      Consequence of graph API?
+\item Missing almost all differentiable types.
 \end{itemize}
 }
 
@@ -179,7 +200,7 @@
 \begin{itemize}\itemsep3ex \parskip1ex
 \item ``Dense'' \& ``fully connected'' mean arbitrary \emph{linear} transformation.
 \item Sprinkle in ``activation functions'' as exceptions to linearity.
-\item May discourage simpler and more efficient architectures.
+\item Misses simpler and more efficient architectures.
 \end{itemize}
 }
 
@@ -220,16 +241,6 @@
 \end{itemize}
 }
 
-\framet{Genuinely automatic differentiation}{
-\begin{itemize}\itemsep2.5ex \parskip1ex
-\item Directly on Haskell \emph{programs}.
-\item At compile time
-\item Efficient run-time code
-\item Amenable to massively parallel execution (GPU, etc)
-\item Based on category theory---principled and flexible.
-\end{itemize}
-}
-
 \framet{Optimization}{
 \begin{itemize}\itemsep2.5ex \parskip1ex
 \item Describe a set of values as range of function: |f :: p -> c|.
@@ -249,6 +260,35 @@
 \item Additivity enables parallel, log-time learning step.
 \end{itemize}
 }
+
+\framet{Differentiable functional programming}{
+\begin{itemize}\itemsep2.5ex \parskip1ex
+\item Directly on Haskell \emph{programs}.
+\item At compile time
+\item Efficient run-time code
+\item Amenable to massively parallel execution (GPU, etc)
+\item Simple, principled, and general.\\
+      (\href{http://conal.net/papers/essence-of-ad/}{\emph{The simple essence of automatic differentiation}})
+\end{itemize}
+}
+
+\framet{General differentiable types}{
+\begin{itemize}\itemsep2.5ex \parskip1ex
+\item Most differentiable types are \emph{not} vectors.
+\item Most derivatives are not matrices.
+\item A more general alternative:
+  \begin{itemize}\itemsep1.5ex \parskip1ex
+  \item \emph{Free vector spaces}: |f s =~ i -> s|
+  \item \emph{Representable functors}: |1|, |f :*: g|, |Id|, |g :.: f|.
+  \item Special case: |Vec n s =~ Fin n s|
+  \item |deriving Generic|
+  \end{itemize}
+\item Compositional, naturally parallel-friendly \\
+      (\href{http://conal.net/papers/generic-parallel-functional/}{\emph{Generic parallel functional programming}})
+\end{itemize}
+}
+
+%if False
 
 \framet{Modularity}{
 \begin{itemize}\itemsep2.5ex \parskip1ex
@@ -273,5 +313,6 @@
 \end{itemize}
 }
 
+%endif
 
 \end{document}
