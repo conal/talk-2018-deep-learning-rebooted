@@ -97,7 +97,7 @@
 \vspace{8ex}
 \begin{itemize}\itemsep4ex \parskip1ex
 \item Extract the essence of DL while shedding accidental complexity.
-\item Support that essence very well.
+\item Generalize and simplify.
 \end{itemize}
 \vspace{8ex}
 \begin{quotation}
