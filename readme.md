@@ -1,4 +1,4 @@
-## What is the essence of deep learning?
+## A Functional Reboot for Deep Learning
 
 Invited talk for [Summer BOB 2019 in Berlin](https://bobkonf.de/2019-summer/program.html).
 
