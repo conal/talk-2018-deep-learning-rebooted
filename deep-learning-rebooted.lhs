@@ -94,12 +94,13 @@
 %endif
 
 \framet{Goals}{
-\vspace{8ex}
-\begin{itemize}\itemsep4ex \parskip1ex
-\item Extract the essence of DL while shedding accidental complexity.
-\item Generalize and simplify.
+\vspace{2ex}
+\begin{itemize}\itemsep3ex \parskip1ex
+\item Extract the essence of DL.
+\item Shed accidental complexity and artificial limitations, \\
+      i.e., simplify \emph{and} generalize.
 \end{itemize}
-\vspace{8ex}
+\vspace{6ex}
 \begin{quotation}
 ``Perfection is achieved not when there is nothing left to add, but when there is nothing left to take away.'' --- Antoine de Saint-Exup\'ery
 \end{quotation}
@@ -107,7 +108,8 @@
 
 \framet{Essence}{
 \begin{itemize}\itemsep3ex \parskip1ex
-\item Optimization: best element of a set (by objective function).
+\item Optimization: best element of a set (by objective function). \\
+  Usually via differentiation and gradient following.
 \item For machine learning, sets of \emph{functions}.
 \item Objective function is defined via set of input/output pairs\out{ (minimize prediction error)}.
 \item Math/function-friendly language.
@@ -256,7 +258,7 @@
 \item Describe a set of values as range of function: |f :: p -> c|.
 \item Objective function: |q :: c -> R|.
 \item Find |argMin (q . f) :: p|.
-\item When |q . f| is differentiable, use GD.
+\item When |q . f| is differentiable, use gradient descent.
 \item Otherwise, other methods.
 \item Consider also global optimization, e.g., with interval methods.
 \end{itemize}
@@ -273,11 +275,11 @@
 
 \framet{Differentiable functional programming}{
 \begin{itemize}\itemsep2.5ex \parskip1ex
-\item Directly on Haskell \emph{programs}.
+\item Directly on Haskell \emph{programs}
 \item At compile time
 \item Efficient run-time code
 \item Amenable to massively parallel execution (GPU, etc)
-\item Simple, principled, and general.\\
+\item Simple, principled, and general\\
       (\href{http://conal.net/papers/essence-of-ad/}{\emph{The simple essence of automatic differentiation}})
 \end{itemize}
 }
@@ -286,18 +288,21 @@
 %format Fin (n) = "\Varid{Fin}_{"n"}"
 
 \framet{General differentiable types}{
-\begin{itemize}\itemsep2ex \parskip0.5ex
-\item Most differentiable types are \emph{not} vectors (uniform $n$-tuples).
-\item Most derivatives (linear maps) are not matrices.
+%\vspace{-2ex}
+\begin{itemize}\itemsep1.25ex \parskip0.5ex
+\item Most differentiable types are \emph{not} vectors (uniform $n$-tuples), and \\
+      most derivatives (linear maps) are not matrices.
 \item A more general alternative:
-  \begin{itemize}\itemsep1ex \parskip0.5ex
-  \item \emph{Free vector spaces}: |forall s. NOP f s =~ i -> s|
-  \item Special case: |Vec n s =~ Fin n -> s|
+  \begin{itemize}\itemsep1ex \parskip0ex
+  \item \emph{Free vector space} over |s|: |i -> s =~ f s| (``|i| indexes |f|'')
+  \item Special case: |Fin n -> s =~ Vec n s|
   \item \emph{Algebra of representable functors}: |f :*: g|, |1|, |g :.: f|, |Id|
   \item Your (representable) functor via |deriving Generic|
   \end{itemize}
-\item Generalized matrix: |g (f s) =~ j -> i -> s =~ i :* j -> s|. \\
-      Other representations give \href{http://conal.net/papers/essence-of-ad/}{efficient reverse-mode AD}.
+\item Use with |Functor|, |Foldable|, |Traversable|, |Scannable|, etc. \\
+  No need for special ``reshaping'' operations.
+\item Generalized matrix: |g (f s) =~ j -> i -> s =~ i :* j -> s =~ (g :.: f) s|. \\
+      Other representations for \href{http://conal.net/papers/essence-of-ad/}{efficient reverse-mode AD} (w/o tears).
 \item Compositional, naturally parallel-friendly \\
       (\href{http://conal.net/papers/generic-parallel-functional/}{\emph{Generic parallel functional programming}})
 \end{itemize}
