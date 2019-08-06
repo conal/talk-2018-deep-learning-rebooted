@@ -14,8 +14,8 @@
 %include greek.fmt
 %include formatting.fmt
 
-%\title{A functional reboot for deep learning}
-\title{What is the essence of deep learning?}
+\title{A Functional Reboot for Deep Learning}
+%\title{What is the essence of deep learning?}
 \date{August 2019}
 % \date{\today{} (draft)}
 \institute[]{Target}
@@ -148,7 +148,7 @@
 \end{itemize}
 }
 
-\framet{Graphs}{
+\framet{Graphs (``networks'')}{
 \begin{itemize}\itemsep2ex \parskip2ex
 \item Clutters API, distracting from purpose.
 \item Purpose: a representation of functions.
@@ -167,19 +167,21 @@
 \item Neglects other forms: parallel \& conditional.
 \item Awkward patches: ``skip connections'', ResNet, HighwayNet.
 \item Don't patch the problem; eliminate it.
+\item Replace with binary sequential, parallel, conditional composition.
 \end{itemize}
 }
 
 \framet{Tensors}{
-\begin{itemize}\itemsep2ex \parskip2ex
+\begin{itemize}\itemsep2ex \parskip1.5ex
 \item Really, multi-dimensional arrays.
 \item Awkward: imagine you could program only with arrays (Fortran).\\
   %% (One size fits none.)
+\item Unsafe without dependent types.
 \item Multiple intents / weakly typed
 \item Even as linear maps: meaning of \(m \times n\) array?
+\item Limited: missing almost all differentiable types.
 \item Missing more natural \& compositional data types, e.g., trees.
       Consequence of graph API?
-\item Missing almost all differentiable types.
 \end{itemize}
 }
 
@@ -204,6 +206,8 @@
 \end{itemize}
 }
 
+%if False
+
 \framet{Hyper-parameters}{
 \begin{itemize}\itemsep4ex \parskip1ex
 \item Unify with parameters for consistency and automation.
@@ -211,15 +215,21 @@
 \end{itemize}
 }
 
+%endif
+
 \framet{Stateful formulations}{
 \begin{itemize}\itemsep3ex \parskip2ex
 \item Complex and ill-defined.
+%if True
+\item Thwarts parallelism
+%else
 \item Stateless alternatives: |map|, |fold|, |unfold|, |scan|.
   \begin{itemize}\itemsep2ex \parskip1ex
   \item Simple, general, effective.
   \item Correct algebraic reasoning.
   \item Parallelism!
   \end{itemize}
+%endif
 \end{itemize}
 }
 
@@ -272,17 +282,22 @@
 \end{itemize}
 }
 
+%format Vec (n) = "\Varid{Vec}_{"n"}"
+%format Fin (n) = "\Varid{Fin}_{"n"}"
+
 \framet{General differentiable types}{
-\begin{itemize}\itemsep2.5ex \parskip1ex
-\item Most differentiable types are \emph{not} vectors.
-\item Most derivatives are not matrices.
+\begin{itemize}\itemsep2ex \parskip0.5ex
+\item Most differentiable types are \emph{not} vectors (uniform $n$-tuples).
+\item Most derivatives (linear maps) are not matrices.
 \item A more general alternative:
-  \begin{itemize}\itemsep1.5ex \parskip1ex
-  \item \emph{Free vector spaces}: |f s =~ i -> s|
-  \item \emph{Representable functors}: |1|, |f :*: g|, |Id|, |g :.: f|.
-  \item Special case: |Vec n s =~ Fin n s|
-  \item |deriving Generic|
+  \begin{itemize}\itemsep1ex \parskip0.5ex
+  \item \emph{Free vector spaces}: |forall s. NOP f s =~ i -> s|
+  \item Special case: |Vec n s =~ Fin n -> s|
+  \item \emph{Algebra of representable functors}: |f :*: g|, |1|, |g :.: f|, |Id|
+  \item Your (representable) functor via |deriving Generic|
   \end{itemize}
+\item Generalized matrix: |g (f s) =~ j -> i -> s =~ i :* j -> s|. \\
+      Other representations give \href{http://conal.net/papers/essence-of-ad/}{efficient reverse-mode AD}.
 \item Compositional, naturally parallel-friendly \\
       (\href{http://conal.net/papers/generic-parallel-functional/}{\emph{Generic parallel functional programming}})
 \end{itemize}
