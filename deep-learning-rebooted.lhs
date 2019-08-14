@@ -307,7 +307,7 @@
   \item Your (representable) functor via |deriving Generic|
   \end{itemize}
 \item Use with |Functor|, |Foldable|, |Traversable|, |Scannable|, etc. \\
-  No need for special ``reshaping'' operations.
+  No need for special array ``reshaping'' operations.
 \item Generalized matrix: |g (f s) =~ j -> i -> s =~ i :* j -> s =~ (g :.: f) s|. \\
       Other representations for \href{http://conal.net/papers/essence-of-ad/}{efficient reverse-mode AD} (w/o tears).
 \item Compositional, naturally parallel-friendly \\
@@ -318,10 +318,10 @@
 \framet{Summary}{
 
 \begin{itemize}\itemsep2.5ex \parskip1ex
-\item DL can be greatly generalized and simplified (more for less).
+\item Generalize \& simplify DL. (More for less).
 \item Essence of DL: pure FP with |minarg|.
-\item Subsumes $n$-tuples and matrices.
-      Better composition and safety.
+\item Generalize from ``tensors''.
+      (Composition \& safety.)
 \end{itemize}
 
 
