@@ -191,6 +191,7 @@
 \framet{Back propagation}{
 \begin{itemize}\itemsep2ex \parskip2ex
 \item Specialization and rediscovery of reverse-mode auto-diff.
+\item Described in terms of graphs.
 \item Stateful:
   \begin{itemize}\itemsep2ex \parskip1ex
   \item More awkward to use.
@@ -203,7 +204,7 @@
 }
 
 \framet{Linearity bias}{
-\begin{itemize}\itemsep3ex \parskip1ex
+\begin{itemize}\itemsep4ex \parskip1ex
 \item ``Dense'' \& ``fully connected'' mean arbitrary \emph{linear} transformation.
 \item Sprinkle in ``activation functions'' as exceptions to linearity.
 \item Misses simpler and more efficient architectures.
@@ -243,9 +244,9 @@
 \partframe{A functional reboot}
 
 \framet{Values}{
-\begin{itemize}\itemsep3ex \parskip1ex
-\item \emph{Precision}: reasoning, correctness.
-\item \emph{Simplicity}: practical dependability.
+\begin{itemize}\itemsep4ex \parskip1ex
+\item \emph{Precision}: meaning, reasoning, correctness.
+\item \emph{Simplicity}: practical rigor/dependability.
 \item \emph{Generality}: design guidance, and room to grow.
 \end{itemize}
 }
@@ -265,14 +266,14 @@
 \item Describe a set of values as range of function: |f :: p -> c|.
 \item Objective function: |q :: c -> R|.
 \item Find |argMin (q . f) :: p|.
-\item When |q . f| is differentiable, use gradient descent.
+\item When |q . f| is differentiable, gradient descent can help.
 \item Otherwise, other methods.
 \item Consider also global optimization, e.g., with interval methods.
 \end{itemize}
 }
 
 \framet{Learning \emph{functions}}{
-\begin{itemize}\itemsep2.5ex \parskip1ex
+\begin{itemize}\itemsep3ex \parskip1ex
 \item Special case of optimization, where |c = a -> b|, i.e., |f :: p -> (a -> b)|, and |q :: (a -> b) -> R|.
 \item Objective function often based on sample set \(S \subseteq a \times b\). \\
       Measure mis-predictions (loss).
@@ -308,9 +309,10 @@
   \end{itemize}
 \item Use with |Functor|, |Foldable|, |Traversable|, |Scannable|, etc. \\
   No need for special array ``reshaping'' operations.
-\item Generalized matrix: |g (f s) =~ j -> i -> s =~ i :* j -> s =~ (g :.: f) s|. \\
+\item %% Generalized matrix: |g (f s) =~ j -> i -> s =~ i :* j -> s =~ (g :.: f) s|. \\
+      Linear map |(g s :-* f s) =~ g (f s) =~ (g :.: f) s| (generalized matrix).\\
       Other representations for \href{http://conal.net/papers/essence-of-ad/}{efficient reverse-mode AD} (w/o tears).
-\item Compositional, naturally parallel-friendly \\
+\item Compositional and naturally parallel-friendly \\
       (\href{http://conal.net/papers/generic-parallel-functional/}{\emph{Generic parallel functional programming}})
 \end{itemize}
 }
@@ -318,10 +320,9 @@
 \framet{Summary}{
 
 \begin{itemize}\itemsep2.5ex \parskip1ex
-\item Generalize \& simplify DL. (More for less).
+\item Generalize \& simplify DL (more for less).
 \item Essence of DL: pure FP with |minarg|.
-\item Generalize from ``tensors''.
-      (Composition \& safety.)
+\item Generalize from ``tensors'' (for composition \& safety).
 \end{itemize}
 
 
