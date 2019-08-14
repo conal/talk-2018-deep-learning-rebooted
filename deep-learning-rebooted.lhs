@@ -93,7 +93,7 @@
 
 %endif
 
-\framet{Goals}{
+\framet{Goal}{
 \vspace{2ex}
 \begin{itemize}\itemsep3ex \parskip1ex
 \item Extract the essence of DL.
@@ -122,13 +122,13 @@
 \begin{itemize}\itemsep1.8ex
 \item Imperative programming
 \item Weak typing
-\item Graphs/networks
+\item Graphs (neural \emph{networks})
 \item Layers
 \item Tensors/arrays
 \item Back propagation
 \item Linearity bias
 \item Hyper-parameters
-\item Stateful formulations
+%% \item Stateful formulations
 \item Manual differentiation
 \end{itemize}
 }
@@ -138,7 +138,8 @@
 \item Thwarts correctness/dependability (usually ``not even wrong'').
 \item Thwarts efficiency (parallelism).
 \item Unnecessary for expressiveness.
-\item DL is math, so express in a math language.
+\item Poor fit.
+      DL is math, so express in a math language.
 \end{itemize}
 }
 
@@ -150,12 +151,12 @@
 \end{itemize}
 }
 
-\framet{Graphs (``networks'')}{
+\framet{Graphs (neural \emph{networks})}{
 \begin{itemize}\itemsep2ex \parskip2ex
 \item Clutters API, distracting from purpose.
 \item Purpose: a representation of functions.
 \item We already have a better one: programming language.
-\item But we can't differentiate.
+\item Can we differentiate?
 \begin{itemize}\itemsep2ex \parskip1ex
   \item An issue of \emph{implementation}, not language or library definition.
   \item Fix accordingly.
@@ -166,14 +167,14 @@
 \framet{Layers}{
 \begin{itemize}\itemsep3ex \parskip1ex
 \item Strong bias toward sequential composition.
-\item Neglects other forms: parallel \& conditional.
+\item Neglects equally important forms: parallel \& conditional.
 \item Awkward patches: ``skip connections'', ResNet, HighwayNet.
 \item Don't patch the problem; eliminate it.
 \item Replace with binary sequential, parallel, conditional composition.
 \end{itemize}
 }
 
-\framet{Tensors}{
+\framet{``Tensors''}{
 \begin{itemize}\itemsep2ex \parskip1.5ex
 \item Really, multi-dimensional arrays.
 \item Awkward: imagine you could program only with arrays (Fortran).\\
@@ -183,18 +184,19 @@
 \item Even as linear maps: meaning of \(m \times n\) array?
 \item Limited: missing almost all differentiable types.
 \item Missing more natural \& compositional data types, e.g., trees.
-      Consequence of graph API?
+      % Consequence of graph API?
 \end{itemize}
 }
 
 \framet{Back propagation}{
 \begin{itemize}\itemsep2ex \parskip2ex
-\item Specialization and re-discovery of reverse-mode auto-diff.
+\item Specialization and rediscovery of reverse-mode auto-diff.
 \item Stateful:
   \begin{itemize}\itemsep2ex \parskip1ex
   \item More awkward to use.
   \item Hinders parallelism/efficiency.
-  \item Impractical with GD, hence SGD, leading away from minima.
+  \item High memory use, limiting problem size.
+        %% Impractical with GD, hence SGD, leading away from minima.
   \end{itemize}
 \item Entangled with GD \& SGD.
 \end{itemize}
@@ -208,16 +210,17 @@
 \end{itemize}
 }
 
-%if False
-
 \framet{Hyper-parameters}{
 \begin{itemize}\itemsep4ex \parskip1ex
-\item Unify with parameters for consistency and automation.
-\item Hybrid search/optimization methods.
+\item Same essential purpose as parameters.
+\item Different mechanisms for expression and search.
+\item Inefficient and ad hoc
+%% \item Unify with parameters for consistency and automation.
+%% \item Hybrid search/optimization methods.
 \end{itemize}
 }
 
-%endif
+%if False
 
 \framet{Stateful formulations}{
 \begin{itemize}\itemsep3ex \parskip2ex
@@ -235,6 +238,8 @@
 \end{itemize}
 }
 
+%endif
+
 \partframe{A functional reboot}
 
 \framet{Values}{
@@ -245,11 +250,13 @@
 \end{itemize}
 }
 
-\framet{Write directly in Haskell}{
+\framet{Program directly in Haskell}{
 \begin{itemize}\itemsep3ex \parskip1ex
-\item Existing semantics (no graphs/networks/layers)
-\item \emph{Higher-order} functions
-\item Rich, static typing
+\item Existing semantics (no graphs/networks/layers).
+\item Well-defined semantics.
+\item General, principled tools for data (re)structuring.
+\item \emph{Higher-order} functions.
+\item Rich, static typing.
 \end{itemize}
 }
 
@@ -287,7 +294,7 @@
 %format Vec (n) = "\Varid{Vec}_{"n"}"
 %format Fin (n) = "\Varid{Fin}_{"n"}"
 
-\framet{General differentiable types}{
+\framet{Beyond ``tensors''}{ % General differentiable types
 %\vspace{-2ex}
 \begin{itemize}\itemsep1.25ex \parskip0.5ex
 \item Most differentiable types are \emph{not} vectors (uniform $n$-tuples), and \\
@@ -306,6 +313,18 @@
 \item Compositional, naturally parallel-friendly \\
       (\href{http://conal.net/papers/generic-parallel-functional/}{\emph{Generic parallel functional programming}})
 \end{itemize}
+}
+
+\framet{Summary}{
+
+\begin{itemize}\itemsep2.5ex \parskip1ex
+\item DL can be greatly generalized and simplified (more for less).
+\item Essence of DL: pure FP with |minarg|.
+\item Subsumes $n$-tuples and matrices.
+      Better composition and safety.
+\end{itemize}
+
+
 }
 
 %if False
