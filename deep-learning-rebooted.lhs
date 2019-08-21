@@ -101,25 +101,31 @@
       i.e., simplify \emph{and} generalize.
 \end{itemize}
 \vspace{6ex}
+%if False
 \begin{quotation}
 ``Perfection is achieved not when there is nothing left to add, but when there is nothing left to take away.'' --- Antoine de Saint-Exup\'ery
 \end{quotation}
+%endif
 }
 
+\nc\EssenceSlide{
 \framet{Essence}{
 \begin{itemize}\itemsep3ex \parskip1ex
 \item Optimization: best element of a set (by objective function). \\
   Usually via differentiation and gradient following.
 \item For machine learning, sets of \emph{functions}.
 \item Objective function is defined via set of input/output pairs\out{ (minimize prediction error)}.
-\item Math/function-friendly language.
+% \item Language: math/function-friendly.
 \end{itemize}
 }
+}
+
+\EssenceSlide
 
 \partframe{Accidental complexity \\[1ex] in deep learning }
 
-\framet{Accidental complexity in DL overview}{
-\begin{itemize}\itemsep1.8ex
+\framet{Accidental complexity in DL (overview)}{
+\begin{itemize}\itemsep2.3ex
 \item Imperative programming
 \item Weak typing
 \item Graphs (neural \emph{networks})
@@ -158,7 +164,7 @@
 \item We already have a better one: programming language.
 \item Can we differentiate?
 \begin{itemize}\itemsep2ex \parskip1ex
-  \item An issue of \emph{implementation}, not language or library definition.
+  \pitem An issue of \emph{implementation}, not language or library definition.
   \item Fix accordingly.
 \end{itemize}
 \end{itemize}
@@ -192,14 +198,15 @@
 \begin{itemize}\itemsep2ex \parskip2ex
 \item Specialization and rediscovery of reverse-mode auto-diff.
 \item Described in terms of graphs.
+\item Highly complex due to graph formulation.
 \item Stateful:
   \begin{itemize}\itemsep2ex \parskip1ex
-  \item More awkward to use.
+  %\item More awkward to use.
   \item Hinders parallelism/efficiency.
   \item High memory use, limiting problem size.
         %% Impractical with GD, hence SGD, leading away from minima.
   \end{itemize}
-\item Entangled with GD \& SGD.
+% \item Entangled with GD \& SGD.
 \end{itemize}
 }
 
@@ -247,19 +254,11 @@
 \begin{itemize}\itemsep4ex \parskip1ex
 \item \emph{Precision}: meaning, reasoning, correctness.
 \item \emph{Simplicity}: practical rigor/dependability.
-\item \emph{Generality}: design guidance, and room to grow.
+\item \emph{Generality}: room to grow; design guidance.
 \end{itemize}
 }
 
-\framet{Program directly in Haskell}{
-\begin{itemize}\itemsep3ex \parskip1ex
-\item Existing semantics (no graphs/networks/layers).
-\item Well-defined semantics.
-\item General, principled tools for data (re)structuring.
-\item \emph{Higher-order} functions.
-\item Rich, static typing.
-\end{itemize}
-}
+\EssenceSlide
 
 \framet{Optimization}{
 \begin{itemize}\itemsep2.5ex \parskip1ex
@@ -281,14 +280,31 @@
 \end{itemize}
 }
 
+%if False
+\framet{Program directly in Haskell (etc)}{
+\begin{itemize}\itemsep3ex \parskip1ex
+\item Why? DL is math, so express in a math language.
+\pitem Existing semantics (no graphs/networks/layers).
+\item Well-defined semantics.
+\item \emph{Higher-order} functions.
+\item Rich, static typing.
+\item General, principled tools for data ``reshaping''.
+\end{itemize}
+}
+%endif
+
 \framet{Differentiable functional programming}{
-\begin{itemize}\itemsep2.5ex \parskip1ex
-\item Directly on Haskell \emph{programs}
-\item At compile time
-\item Efficient run-time code
-\item Amenable to massively parallel execution (GPU, etc)
+\begin{itemize}\itemsep2.3ex \parskip1ex
+\item Directly on Haskell (etc) \emph{programs}:
+\begin{itemize} \parskip2ex
+\item Not a library/DSEL
+\item No graphs/networks/layers
+\end{itemize}
+\pitem Differentiated at compile time
 \item Simple, principled, and general\\
       (\href{http://conal.net/papers/essence-of-ad/}{\emph{The simple essence of automatic differentiation}})
+\item Generating efficient run-time code
+\item Amenable to massively parallel execution (GPU, etc)
 \end{itemize}
 }
 
@@ -307,52 +323,59 @@
   \item \emph{Algebra of representable functors}: |f :*: g|, |1|, |g :.: f|, |Id|
   \item Your (representable) functor via |deriving Generic|
   \end{itemize}
-\item Use with |Functor|, |Foldable|, |Traversable|, |Scannable|, etc. \\
-  No need for special array ``reshaping'' operations.
 \item %% Generalized matrix: |g (f s) =~ j -> i -> s =~ i :* j -> s =~ (g :.: f) s|. \\
-      Linear map |(g s :-* f s) =~ g (f s) =~ (g :.: f) s| (generalized matrix).\\
+      Linear map |(f s :-* g s) =~ g (f s) =~ (g :.: f) s| (generalized matrix).\\
       Other representations for \href{http://conal.net/papers/essence-of-ad/}{efficient reverse-mode AD} (w/o tears).
+\pause
+\item Use with |Functor|, |Foldable|, |Traversable|, |Scannable|, etc. \\
+  No need for special/limited array ``reshaping'' operations.
 \item Compositional and naturally parallel-friendly \\
       (\href{http://conal.net/papers/generic-parallel-functional/}{\emph{Generic parallel functional programming}})
 \end{itemize}
 }
 
-\framet{Summary}{
-
-\begin{itemize}\itemsep2.5ex \parskip1ex
-\item Generalize \& simplify DL (more for less).
-\item Essence of DL: pure FP with |minarg|.
-\item Generalize from ``tensors'' (for composition \& safety).
-\end{itemize}
-
-
-}
-
-%if False
+%if True
 
 \framet{Modularity}{
 \begin{itemize}\itemsep2.5ex \parskip1ex
 \item How to build function families from pieces, as in DL?
-\item Category of sets of functions.
+\item Category of indexed sets of functions.
   %% Automatically combines and routes parameters from separate families.
 \item Extract monolithic function after composing.
 \item Other uses, including satisfiability.
 \item Prototyped, but problem with GHC type-checker.
-      Seeking help.
+      % Seeking help.
+%if False
 \item Violates a cartesian axiom.
       Looking for alternatives.
+%endif
 \end{itemize}
 }
 
 \framet{Progress}{
 \begin{itemize}\itemsep2.5ex \parskip2ex
-\item Formulated some regressions, standard DL, and CNN.
-\item Identified implementation problems with scaling and robustness.
-\item Breakthroughs in both, including functor-level operations.
 \item Simple \& efficient reverse-mode AD.
+\item Some simple regressions, simple DL, and CNN.
+\item Some implementation challenges with robustness.
+\item Looking for collaborators, including
+\begin{itemize}\parskip2.5ex
+\item GHC internals (compiling-to-categories plugin)
+\item Background in machine learning and statistics
+\end{itemize}
+
+%\item Breakthroughs in both, including functor-level operations.
 \end{itemize}
 }
 
 %endif
+
+\framet{Summary}{
+\begin{itemize}\itemsep2.5ex \parskip1ex
+\item Generalize \& simplify DL (more for less).
+\item Essence of DL: pure FP with |minarg|.
+\item Generalize from ``tensors'' (for composition \& safety).
+\item Collaboration welcome!
+\end{itemize}
+}
 
 \end{document}
