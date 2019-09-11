@@ -2,8 +2,7 @@
 
 Invited talk for [Summer BOB 2019 in Berlin](https://bobkonf.de/2019-summer/program.html).
 
-You can find [the slides (PDF)](http://conal.net/talks/deep-learning-rebooted.pdf) in [my talks folder](http://conal.net/talks/).
-I'll post a video link when available.
+You can find [the slides (PDF)](http://conal.net/talks/deep-learning-rebooted.pdf) in [my talks folder](http://conal.net/talks/). [A video (50 mins)](https://www.youtube.com/watch?v=Ns3DxUeCvRg) is available on YouTube.
 
 **Abstract**:
 
