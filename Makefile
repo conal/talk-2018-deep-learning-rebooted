@@ -12,6 +12,16 @@ pdfs = $(addsuffix .pdf, $(basename $(dots))) $(wildcard Figures/circuits/*-scal
 %.pdf: %.tex $(pdfs) Makefile
 	pdflatex $*.tex
 
+# latex=latexmk -pdf -halt-on-error
+
+# %.pdf: %.tex macros.tex bib.bib Makefile
+# 	$(latex) $*.tex
+# 	touch $@
+
+# The previous rule always ran. Passing "-d" (debug) to make revealed that the
+# PDFs were not getting updated by latexmk, so their prerequisites stay newer.
+# Workaround: touch the PDF.
+
 %.tex: %.lhs macros.tex formatting.fmt Makefile
 	lhs2TeX -o $*.tex $*.lhs
 

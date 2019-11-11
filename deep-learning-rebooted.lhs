@@ -2,8 +2,8 @@
 
 % Presentation
 %\documentclass[aspectratio=1610]{beamer} % Macbook Pro screen 16:10
-\documentclass{beamer} % default aspect ratio 4:3
-%% \documentclass[handout]{beamer}
+%% \documentclass{beamer} % default aspect ratio 4:3
+\documentclass[handout]{beamer}
 
 % \setbeameroption{show notes} % un-comment to see the notes
 
@@ -318,13 +318,13 @@
       most derivatives (linear maps) are not matrices.
 \item A more general alternative:
   \begin{itemize}\itemsep1ex \parskip0ex
-  \item \emph{Free vector space} over |s|: |i -> s =~ f s| (``|i| indexes |f|'')
-  \item Special case: |Fin n -> s =~ Vec n s|
+  \item \emph{Free vector space} over |s|: |i -> s =~= f s| (``|i| indexes |f|'')
+  \item Special case: |Fin n -> s =~= Vec n s|
   \item \emph{Algebra of representable functors}: |f :*: g|, |1|, |g :.: f|, |Id|
   \item Your (representable) functor via |deriving Generic|
   \end{itemize}
-\item %% Generalized matrix: |g (f s) =~ j -> i -> s =~ i :* j -> s =~ (g :.: f) s|. \\
-      Linear map |(f s :-* g s) =~ g (f s) =~ (g :.: f) s| (generalized matrix).\\
+\item %% Generalized matrix: |g (f s) =~= j -> i -> s =~= i :* j -> s =~= (g :.: f) s|. \\
+      Linear map |(f s :-* g s) =~= g (f s) =~= (g :.: f) s| (generalized matrix).\\
       Other representations for \href{http://conal.net/papers/essence-of-ad/}{efficient reverse-mode AD} (w/o tears).
 \pause
 \item Use with |Functor|, |Foldable|, |Traversable|, |Scannable|, etc. \\

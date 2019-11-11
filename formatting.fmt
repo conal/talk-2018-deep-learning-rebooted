@@ -8,7 +8,6 @@
 
 %format NOP = "{}"
 
-%format =~ = " \simeq "
 %format =~= = " \cong "
 
 %% optional double-dollar spelling, to avoid $ confusing emacs latex-mode.
